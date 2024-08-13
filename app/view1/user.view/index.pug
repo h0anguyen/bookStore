@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  section.bg-light
+    .container 
+        h1.text-center Users List
+          table.table
+            thead
+              tr
+                th(scope='col') full name
+                th(scope='col') avatar
+                th(scope='col') email
+                th(scope='col') password
+                th(scope='col') role
+            tbody
+              each user in users
+                tr.align-middle
+                  td(scope='row')= user.name
+                  td(scope='row')
+                    img(src=`${user.avatarUrl}` alt="Avatar" width="200px" height="200px")
+                  td(scope='row')= user.name
+                  td(scope='row')= user.password
+                  td(scope='row')
+                    if user.role==1
+                      |User
+                    else 
+                      |Admin
+                  
+                  
