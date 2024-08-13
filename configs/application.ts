@@ -45,6 +45,7 @@ class Application {
 
     // Xuất file tĩnh như CSS, Javascript và các thư viện như Bootstraps, Vue, ...
     this.app.use(express.static(join(resolve("app"), "assets")));
+
     this.app.use(
       "/css",
       express.static(join(resolve("./node_modules"), "bootstrap/dist/css"))

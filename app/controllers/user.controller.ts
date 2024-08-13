@@ -5,7 +5,9 @@ import { ApplicationController } from ".";
 
 export class UserController extends ApplicationController {
   public async index(req: Request, res: Response) {
-    res.render("user.view/index");
+    const users = await models.user.findAll();
+    console.log(users);
+    res.render("user.view/index", { title: "Irwin Framework", users: users });
   }
   public async new(req: Request, res: Response) {
     res.render("user.view/new");
