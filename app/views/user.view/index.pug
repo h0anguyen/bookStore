@@ -17,8 +17,8 @@ block content
                 tr.align-middle
                   td(scope='row')= user.name
                   td(scope='row')
-                    img(src=`${user.avatarUrl}` alt="Avatar" width="200px" height="200px")
-                  td(scope='row')= user.name
+                    img(src=`${user.avatarUrl}` alt="Avatar" width="150px" height="150px")
+                  td(scope='row')= user.email
                   td(scope='row')= user.password
                   td(scope='row')
                     if user.role==1

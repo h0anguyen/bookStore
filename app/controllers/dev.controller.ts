@@ -61,7 +61,7 @@ export class DevController extends ApplicationController {
       },
     })) as CategoryInstance;
 
-    res.render("dev.view/edit", { category: category });
+    res.render("dev.view/edit", { user:req.user, category: category });
   }
 
   public async update(req: Request, res: Response) {}

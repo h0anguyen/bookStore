@@ -7,6 +7,7 @@ import { ApplicationController } from ".";
 
 export class AuthController extends ApplicationController {
   public async loginWithGoogle(req: Request, res: Response) {
+    const a = env;
     res.redirect(
       `https://accounts.google.com/o/oauth2/v2/auth?client_id=${env.googleClientId}&redirect_uri=${env.googleRedirectUri}&response_type=code&scope=profile email`
     );
@@ -78,5 +79,26 @@ export class AuthController extends ApplicationController {
         res.redirect("https://accounts.google.com/logout");
       }
     });
+  }
+  public async index(req: Request, res: Response) {
+    res.render("auth.view/index");
+  }
+  public async create(req: Request, res: Response) {
+    const { email, password } =req.body;
+
+    const user =await models.user.findOne({
+      where: {
+        email,
+        password
+      }
+    });
+
+    if(user===null){
+      req.flash("errors", { msg: "Not login" });
+      return res.redirect("/auth");
+    }
+    else{
+      res.render("/" ,{ user:user });
+    }
   }
 }

@@ -31,7 +31,7 @@ class Application {
     this.app.use(
       session({
         secret: process.env.SESSION_SECRET || "a",
-        resave: false,
+        resave: true,
         saveUninitialized: true,
         cookie: {
           secure: false,

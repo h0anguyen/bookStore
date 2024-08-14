@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet" href="/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/stylesheets/login.css")
+  body
+    .wrapper.fadeInDown
+      #formContent
+        // Tabs Titles
+        // Icon
+        .fadeIn.first
+          h2.text-center.text-body Login
+        // Login Form
+        form(action="/auth" method="post")
+          input#login.fadeIn.second(type='email' name='email' placeholder='email')
+          input#password.fadeIn.third(type='password' name='password' placeholder='password')
+          input.fadeIn.fourth(type='submit' value='Log In')
+        // Remind Passowrd
+        #formFooter
+          a.underlineHover(href='/auth/google') 
+            i.bi.bi-google 
+            span.mr-3 Google
+        #formFooter
+          a.underlineHover(href='/users/new') Sin Up
+
+
+    script(type="text/javascript" src="/js/bootstrap.min.js")
+    script(type="text/javascript" src="/js/jquery.min.js")
+    script(type="text/javascript" src="/js/vue.min.js")
+    script(type="text/javascript" src="/javascripts/main.js")
+    script(type="text/javascript" src="/javascripts/generated/bundle.js")
