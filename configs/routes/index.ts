@@ -15,7 +15,7 @@ export class Route {
     if (env.nodeEnv === "development") this.path.use("/dev", DevRoute.draw());
     this.path.use("/auth", AuthRoute.draw());
     this.path.use("/users", UserRoute.draw());
-    this.path.use("/products", ProductRoute.draw());
+    this.path.use("/categories", ProductRoute.draw());
 
     Route.resource(this.path, this.homeController, {
       only: [RestActions.Index],
