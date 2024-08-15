@@ -79,7 +79,7 @@ class Application {
   }
 
   mountRoutes() {
-    this.app.use('/', Route.draw());
+    this.app.use("/", Route.draw());
   }
 
   on404Handler() {

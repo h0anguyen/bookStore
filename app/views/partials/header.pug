@@ -8,7 +8,7 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.navbar-shrink.fixed-top
     #navbarResponsive.collapse.navbar-collapse
       ul.navbar-nav.text-uppercase.ms-auto.py-4.py-lg-0
         li.nav-item
-          a.nav-link(href='/users') Courses
+          a.nav-link(href='/users') User
         li.nav-item
           a.nav-link(href='#services') Services
         li.nav-item
@@ -17,12 +17,12 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.navbar-shrink.fixed-top
           a.nav-link(href='#team') Team
         li.nav-item
           a.nav-link(href='#contact') Contact
-          if(user)
-            li.nav-item
-              form(action="/auth?_method=DELETE" method="post") 
-                a.nav-link(href='/')= user.name
-          else
-            li.nav-item
-              a.nav-link(href='/auth') Log In
-            
-
+        - if (!user)
+          li.nav-item
+            a.nav-link(href='/auth') Login
+        - else
+          li.nav-item
+            form.nav-link(method='POST' action='/auth?_method=DELETE')
+              img(style='width: 40px; height: 40px; border-radius: 50%' src=`${user.avatarUrl}`)
+              button.btn.btn-danger(type="submit")
+                | Logout

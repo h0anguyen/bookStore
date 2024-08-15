@@ -6,7 +6,6 @@ import { ApplicationController } from ".";
 export class UserController extends ApplicationController {
   public async index(req: Request, res: Response) {
     const users = await models.user.findAll();
-    console.log(users);
     res.render("user.view/index", { user: req.user });
   }
   public async new(req: Request, res: Response) {
