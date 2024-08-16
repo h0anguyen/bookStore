@@ -4,9 +4,11 @@ import express, { Express, NextFunction, Request, Response } from "express";
 import flash from "express-flash";
 import session from "express-session";
 import createError from "http-errors";
+import methodOverride from "method-override";
 import { join, resolve } from "path";
 import serverless from "serverless-http";
 import { Route } from "./routes";
+
 
 type RouteInfo = {
   method: string;
@@ -45,7 +47,7 @@ class Application {
 
     // Xuất file tĩnh như CSS, Javascript và các thư viện như Bootstraps, Vue, ...
     this.app.use(express.static(join(resolve("app"), "assets")));
-
+    this.app.use(methodOverride("_method"));
     this.app.use(
       "/css",
       express.static(join(resolve("./node_modules"), "bootstrap/dist/css"))

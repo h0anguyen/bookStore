@@ -10,7 +10,7 @@ export class ProductController extends ApplicationController {
   public async show(req: Request, res: Response) {
     const products = await models.product.findAll({
       where: {
-        categoryId: +req.params.id,
+        categoryId: +req.params.id ,
       },
       include: [{ model: models.category }],
     });

@@ -11,8 +11,8 @@ export class UserRoute {
     this.path
       .route("/")
       .get(
-        this.userController.validateUserLogin,
-        this.userController.validateAdmin,
+        // this.userController.validateUserLogin,
+        // this.userController.validateAdmin,
         this.userController.index
       );
     Route.resource(this.path, this.userController, {
