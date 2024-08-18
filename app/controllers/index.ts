@@ -4,6 +4,8 @@ export * from "./category.controller";
 export * from "./dev.controller";
 export * from "./home.controller";
 export * from "./product.controller";
+export * from "./product.controller.user";
 export * from "./user.controller";
+
 
 

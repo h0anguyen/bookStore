@@ -15,7 +15,7 @@ block content
         .container
           ol.breadcrumb
             li.breadcrumb-item
-              a(href='index.html') Home
+              a(href='/') Home
             li.breadcrumb-item
               a(href='#') Shop
             li.breadcrumb-item.active(aria-current='page') Grid 4 Columns
@@ -51,8 +51,10 @@ block content
                       .product.product-7.text-center
                         figure.product-media
                           span.product-label.label-new New
-                          a(href='product.html')
-                            img.product-image(src=`${product.image}` alt='Product image')
+                          a(href=`/prusers/${product.id}`)
+                            if(product.image)
+                              img.product-image#products-list-view(src=`data:image/png;base64,${product.image.toString('base64')}`, alt=`product_${product.name}` )
+
                           .product-action
                             a.btn-product.btn-cart(href='#')
                               span add to cart
@@ -60,13 +62,14 @@ block content
                         // End .product-media
                         .product-body
                           .product-cat
-                            a(href='#') Sách Giáo Khoa
+                            a(href='#')=product.category.name
                           // End .product-cat
-                          h3.product-title
-                            a(href='product.html')= product.name
+                          h3.product-title.product-title-user
+                            a(href='#')= product.name
                           // End .product-title
                           .product-price
-                            = product.price|.000
+                            = product.price 
+                            |.000đ
                           // End .product-price
                           .ratings-container
                             .ratings

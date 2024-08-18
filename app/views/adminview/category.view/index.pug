@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  .container-fluid.px-4
+    .row
+      .col-6
+        h1.mt-4 Categories
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Categories
+      .col-6
+        a.btn.btn-primary.add(type="submit" href="/categories/new" ) Add Category
+    .card.mb-4
+      .card-header
+        i.fas.fa-table.me-1
+        |Categories list
+      .card-body
+        table#datatablesSimple
+          thead
+            tr
+              th Id
+              th Name
+              th Description
+              th Image
+              th 
+          tfoot
+              th Id
+              th Name
+              th Description
+              th Image
+              th 
+          tbody
+            each category in categories
+              tr
+                td= category.id
+                td= category.name
+                td= category.description 
+                td
+                  form(action=`/categories/${category.id}/edit`, method="get")
+                    button.btn.btn-info(type="submit") Edit
+                td 
+                  form(action=`/categories/${category.id}?_method=DELETE`, method="post")
+                    button.btn.btn-danger(type="submit") Delete
+                
+
+                

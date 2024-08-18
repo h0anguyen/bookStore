@@ -27,8 +27,8 @@ class Application {
     this.app.set("view engine", "pug");
 
     // Cài đặt các công cụ giải mã
-    this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(express.json());
     this.app.use(cookieParser());
     this.app.use(
       session({
@@ -44,7 +44,7 @@ class Application {
     );
     this.app.use(flash());
     this.app.use(bodyParser.urlencoded({ extended: false }));
-
+    this.app.use(express.static(__dirname + "/css/"));
     // Xuất file tĩnh như CSS, Javascript và các thư viện như Bootstraps, Vue, ...
     this.app.use(express.static(join(resolve("app"), "assets")));
     this.app.use(methodOverride("_method"));

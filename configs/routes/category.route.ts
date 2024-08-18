@@ -12,7 +12,14 @@ export class CategoryRoute {
     this.path.post("/", upload.single("image"),this.CategoryController.create)
     // bước 1
     Route.resource(this.path, this.CategoryController, {
-      only: [RestActions.Index, RestActions.New, RestActions.Destroy],
+      only: [
+        RestActions.Index,
+        RestActions.New,
+        RestActions.Destroy,
+        RestActions.Edit,
+        RestActions.Update,
+        RestActions.Show,
+      ],
     });
 
     return this.path;

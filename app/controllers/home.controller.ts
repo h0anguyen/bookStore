@@ -3,7 +3,7 @@ import { ApplicationController } from ".";
 
 export class HomeController extends ApplicationController {
   public async index(req: Request, res: Response) {
-    res.render("home.view/index");
+    res.render("userview/home.view/index");
   }
   
 }

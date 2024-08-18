@@ -1,0 +1,46 @@
+extends ../layout
+
+block content
+  .container-fluid.px-4
+    .row
+      .col-6
+        h1.mt-4 Users
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Users
+      .col-6
+        button.btn.btn-primary.add(type="submit") Add User
+    .card.mb-4
+      .card-header
+        i.fas.fa-table.me-1
+        |Users list
+      .card-body
+        table#datatablesSimple
+          thead
+            tr
+              th Id
+              th Name
+              th Email
+              th Role
+              th Create date
+              th 
+          tfoot
+              th Id
+              th Name
+              th Email
+              th Role
+              th Create date
+              th 
+          tbody
+            each user in users
+              tr
+                td= user.id
+                td= user.name
+                td= user.email 
+                td= user.role 
+                td= user.createdAt
+                td 
+                  form(action=`/users/${user.id}?_method=DELETE`, method="post")
+                    button.btn.btn-danger(type="submit") Delete
+                
+
+                

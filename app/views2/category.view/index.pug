@@ -24,6 +24,6 @@ block content
                   img.rounded-circle(src=`data:image/png;base64,${category.image.toString('base64')}`, alt=`category_${category.name}`  width='300' height='300')
               td 
                 form(method="POST" action=`/categories/${category.id}?_method=DELETE`)
-                  button.btn.btn-danger(type="submit")
+                  button.btn.btn-danger(type="submit")  
                     i.fa.fa-trash
             

@@ -16,7 +16,7 @@ export class UserRoute {
         this.userController.index
       );
     Route.resource(this.path, this.userController, {
-      only: [RestActions.New, RestActions.Create],
+      only: [RestActions.New, RestActions.Create, RestActions.Destroy],
     });
 
     return this.path;
