@@ -10,6 +10,12 @@ export class CategoryRoute {
 
   public static draw() {
     this.path.post("/", upload.single("image"),this.CategoryController.create)
+    this.path.put(
+      "/:id",
+      upload.single("image"),
+      this.CategoryController.update
+    );
+
     // bước 1
     Route.resource(this.path, this.CategoryController, {
       only: [
@@ -17,7 +23,6 @@ export class CategoryRoute {
         RestActions.New,
         RestActions.Destroy,
         RestActions.Edit,
-        RestActions.Update,
         RestActions.Show,
       ],
     });

@@ -85,8 +85,8 @@ export class CategoryController extends ApplicationController {
     const file = req.file ? convertFileToBase64(req.file) : null;
     await models.category.update(
       {
-        name: req.body.name,
-        description: req.body.description,
+        name,
+        description,
         image: file,
       },
       {

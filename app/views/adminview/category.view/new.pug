@@ -13,7 +13,7 @@ block content
           .col-4 
             .image-upload
               label(for='file-input')
-                img#preview.rounded-circle(src='https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png' width='300' height='300')
+                img#preview.rounded-circle(src='https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png' accept="image/*" width='300' height='300')
               input#file-input.d-none(type='file' name="image")
 
               script.
@@ -33,6 +33,6 @@ block content
             .col-12.mt-2
               .form-group
                 label.mb-2(for='email') Description
-                textarea.form-control.w-100(name='description' placeholder='Input your description')
+                textarea.form-control.w-100(name='description' placeholder='Input your description'  rows="6" cols="70")
             .col-12.mt-5
               button.btn.btn-primary.w-100(type="submit") Submit

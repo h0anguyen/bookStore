@@ -30,6 +30,7 @@ export class ProductController extends ApplicationController {
       where: {
         id,
       },
+      include: [{ model :models.category}],
     });
 
     res.render("adminview/product.view/edit", { categories, product });
@@ -37,7 +38,55 @@ export class ProductController extends ApplicationController {
 
   public async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, description } = req.body;
+    const { name, description, categoryId, price } = req.body;
+
+    if (!id) {
+      req.flash("error", { msg: `Id is not match ` });
+      return res.redirect("/products");
+    }
+
+    const a = models.category.findById(id);
+
+    if (!a) {
+      req.flash("error", { msg: `Id is not match ` });
+      return res.redirect("/products");
+    }
+
+    const file = req.file ? convertFileToBase64(req.file) : null;
+    if (file) {
+      await models.product.update(
+        {
+          name,
+          description,
+          price,
+          categoryId,
+          image: file,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+    } else {
+      await models.product.update(
+        {
+          name,
+          description,
+          price,
+          categoryId,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+    }
+
+    req.flash("success", { msg: `Udpate success` });
+    res.redirect("/products");
+
   }
 
   public async destroy(req: Request, res: Response) {

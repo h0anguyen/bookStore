@@ -10,6 +10,11 @@ export class ProductRoute {
 
   public static draw() {
     this.path.post("/", upload.single("image"), this.productController.create);
+    this.path.put(
+      "/:id",
+      upload.single("image"),
+      this.productController.update
+    );
 
     Route.resource(this.path, this.productController, {
       only: [
@@ -17,7 +22,6 @@ export class ProductRoute {
         RestActions.New,
         RestActions.Show,
         RestActions.Destroy,
-        RestActions.Update,
         RestActions.Edit,
       ],
     });

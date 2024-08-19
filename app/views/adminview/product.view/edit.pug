@@ -12,9 +12,14 @@ block content
         .row
           .col-4 
            .image-upload
-              label(for='file-input')
-                img#preview(src=`data:image/png;base64,${product.image.toString('base64')}` width='300' height='300')
-              input#file-input.d-none(type='file' name="image")
+              -if(product.image)
+                label(for='file-input')
+                  img#preview(src=`data:image/png;base64,${product.image.toString('base64')}` accept="image/*" width='300' height='300')
+                input#file-input.d-none(type='file' name="image")
+              -else
+                label(for='file-input')
+                  img#preview(src='https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png' accept="image/*" width='300' height='300')
+                input#file-input.d-none(type='file' name="image")
 
               script.
                 const inputTag = document.getElementById('file-input');
@@ -33,7 +38,16 @@ block content
             .col-12.mt-2
               .form-group
                 label.mb-2(for='email') Price
-                input.form-control.w-100(name='price' placeholder='Input your price' value=`${product.price}.000đ`)
+                input.form-control.w-100(name='price' placeholder='Input your price' value=`${product.price}`)
+            .col-12.mt2 
+              .form-group
+                  label.mb-2(for='email') Category
+                  select#exampleFormControlSelect1.form-control(name="categoryId")
+                    each category in categories
+                      if (product.category.id==category.id)
+                        option(value=`${product.category.id}` selected)= product.category.name
+                      else 
+                        option(value=`${category.id}`)= category.name
             .col-12.mt-2
               .form-group
                 label.mb-2(for='email') Description
