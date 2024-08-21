@@ -3,6 +3,7 @@ import { HomeController } from "@controllers";
 import { Router } from "express";
 import { RestActions } from "../enum";
 import { AuthRoute } from "./auth.route";
+import { CartRoute } from "./cart.route";
 import { CategoryRoute } from "./category.route";
 import { DevRoute } from "./dev.route";
 import { ProductRoute } from "./product.route";
@@ -20,6 +21,7 @@ export class Route {
     this.path.use("/categories", CategoryRoute.draw());
     this.path.use("/products", ProductRoute.draw());
     this.path.use("/prusers", ProductRouteUser.draw());
+    this.path.use("/carts", CartRoute.draw());
 
     Route.resource(this.path, this.homeController, {
       only: [RestActions.Index],

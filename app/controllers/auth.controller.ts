@@ -73,7 +73,7 @@ export class AuthController extends ApplicationController {
   }
 
   public async index(req: Request, res: Response) {
-    res.render("auth.view/index");
+    res.render("userview/auth.view/index");
   }
   public async create(req: Request, res: Response) {
     const { email, password } = req.body;

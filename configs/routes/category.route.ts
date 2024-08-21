@@ -6,18 +6,18 @@ import { upload } from "../fileUpload";
 
 export class CategoryRoute {
   private static path = Router();
-  private static CategoryController = new CategoryController();
+  private static categoryController = new CategoryController();
 
   public static draw() {
-    this.path.post("/", upload.single("image"),this.CategoryController.create)
+    this.path.post("/", upload.single("image"), this.categoryController.create);
     this.path.put(
       "/:id",
       upload.single("image"),
-      this.CategoryController.update
+      this.categoryController.update
     );
 
     // bước 1
-    Route.resource(this.path, this.CategoryController, {
+    Route.resource(this.path, this.categoryController, {
       only: [
         RestActions.Index,
         RestActions.New,

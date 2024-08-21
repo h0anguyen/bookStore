@@ -14,10 +14,15 @@ header.header
                   i.icon-phone
                   | Call: +0123 456 789
               li
-              li
-                a(href='#signin-modal' data-toggle='modal')
-                  i.icon-user
-                  | Login
+              - if (!user)
+                li
+                  a.nav-link(href='/auth') Login
+              - else
+                li
+                  form.nav-link(method='POST' action='/auth?_method=DELETE')
+                    img(style='width: 40px; height: 40px; border-radius: 50%' src=`${user.avatarUrl}`)
+                    button.btn.btn-danger(type="submit")
+                      | Logout
         // End .top-menu
       // End .header-right
     // End .container
@@ -28,7 +33,7 @@ header.header
         button.mobile-menu-toggler
           span.sr-only Toggle mobile menu
           i.icon-bars
-        a.logo(href='#')
+        a.logo(href='/')
           img(src='/images/logo.png' alt='Molla Logo' width='105' height='25')
         nav.main-nav
           ul.menu.sf-arrows
@@ -180,7 +185,7 @@ header.header
             // End .header-search-wrapper
         // End .header-search
         .dropdown.cart-dropdown
-          a.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-display='static')
+          a.dropdown-toggle(href='/carts' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-display='static')
             i.icon-shopping-cart
             span.cart-count 2
           .dropdown-menu.dropdown-menu-right
@@ -219,7 +224,7 @@ header.header
               span.cart-total-price $160.00
             // End .dropdown-cart-total
             .dropdown-cart-action
-              a.btn.btn-primary(href='cart.html') View Cart
+              a.btn.btn-primary(href='/carts') View Cart
               a.btn.btn-outline-primary-2(href='checkout.html')
                 span Checkout
                 i.icon-long-arrow-right
