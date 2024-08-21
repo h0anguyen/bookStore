@@ -14,7 +14,7 @@ block content
                   a#register-tab-2.nav-link.active(data-toggle='tab' href='#register-2' role='tab' aria-controls='register-2' aria-selected='true') Register
               .tab-content
                 #signin-2.tab-pane.fade(role='tabpanel' aria-labelledby='signin-tab-2')
-                  form(action='/auth')
+                  form(action='/auth/login' method="post")
                     .form-group
                       label(for='singin-email-2') Email address *
                       input#singin-email-2.form-control(type='email' name='email' required='')

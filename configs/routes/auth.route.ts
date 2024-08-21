@@ -12,6 +12,9 @@ export class AuthRoute {
     this.path
       .route("/google/callback")
       .get(this.authController.loginWithGoogleRedirect);
+      this.path
+      .route("/login")
+      .post(this.authController.logIn);
 
     Route.resource(this.path, this.authController, {
       only: [RestActions.Destroy, RestActions.Index],

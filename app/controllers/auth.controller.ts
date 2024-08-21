@@ -99,4 +99,18 @@ export class AuthController extends ApplicationController {
       }
     });
   }
+  public async logIn(req: Request, res: Response){
+    const { email, password } = req.body;
+    const checkemail= await models.user.findOne({
+      where: {
+        email
+      },
+    }
+  )
+  // if(checkemail){
+  //   if(checkemail.password === password){
+
+  //   }
+  // }
+  }
 }

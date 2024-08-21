@@ -8,6 +8,8 @@ export class CartRoute {
   private static cartController = new CartController();
 
   public static draw() {
+    this.path.use(this.cartController.validateUserLogin)
+
     Route.resource(this.path, this.cartController, {
       only: [
         RestActions.Index,

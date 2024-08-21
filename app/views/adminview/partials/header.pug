@@ -76,6 +76,10 @@ nav.sb-topnav.navbar.navbar-expand.navbar-dark.bg-dark
               each category in categories
                 a.nav-link(href=`/categories/${category.id}`)= category.name                  
               a.badge.badge-light(href="/categories") All Categories
+          a.nav-link(href='/products')
+            .sb-nav-link-icon
+              i.fas.fa-chart-area
+            |                                 Products
           .sb-sidenav-menu-heading Addons
           a.nav-link(href='charts.html')
             .sb-nav-link-icon

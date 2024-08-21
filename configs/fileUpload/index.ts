@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { readFileSync, unlinkSync } from "fs";
+import { readFileSync } from "fs";
 import multer, { FileFilterCallback } from "multer";
 import path from "path";
 
@@ -29,7 +29,7 @@ export const convertFileToBase64 = (file: Express.Multer.File) => {
   const fileReaded = readFileSync(file.path);
   const encodeFile = fileReaded.toString("base64");
 
-  unlinkSync(file.path);
+  // unlinkSync(file.path);
 
   return Buffer.from(encodeFile, "base64");
 }
