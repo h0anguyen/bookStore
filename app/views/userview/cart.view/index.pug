@@ -35,44 +35,38 @@ block content
                       th Total
                       th
                   tbody
-                    each cart in carts
-                      tr
-                        td.product-col
-                          .product
-                            figure.product-media
-                              a(href='#')
-                                if(cart.product.image)
-                                  img.product-image(src=`data:image/png;base64,${cart.product.image.toString('base64')}`, alt=`product_${cart.product.name}` )
-                            h3.product-title
-                              a(href='#')= cart.product.name
-                            // End .product-title
-                          // End .product
-                        td.price-col= cart.product.price
-                          |.000đ
-                        td.quantity-col
-                          .cart-product-quantity
-                            input.form-control(type='number' value=cart.quantity min='1' max='10' step='1' data-decimals='0' required='')
-                          // End .cart-product-quantity
-                        td.total-col= cart.product.price*cart.quantity
-                          |.000đ
-                        td.remove-col
-                          button.btn-remove
-                            i.icon-close
-                    
-                .cart-bottom
-                  .cart-discount
-                    form(action='#')
-                      .input-group
-                        input.form-control(type='text' required='' placeholder='coupon code')
-                        .input-group-append
-                          button.btn.btn-outline-primary-2(type='submit')
-                            i.icon-long-arrow-right
-                        // .End .input-group-append
-                      // End .input-group
-                  // End .cart-discount
-                  a.btn.btn-outline-dark-2(href='#')
-                    span UPDATE CART
-                    i.icon-refresh
+                  - Subtotal=0;
+                    form(action="/carts/update?_method=PATCH", method="post") 
+                      each cart in carts
+                        tr
+                          td.product-col
+                            .product
+                              figure.product-media
+                                a(href='#')
+                                  if(cart.product.image)
+                                    img.product-image(src=`data:image/png;base64,${cart.product.image.toString('base64')}`, alt=`product_${cart.product.name}` )
+                              h3.product-title
+                                a(href='#')= cart.product.name
+                              // End .product-title
+                            // End .product
+                          td.price-col= cart.product.price
+                            |.000đ
+                          td.quantity-col
+                            .cart-product-quantity
+                              input.form-control(type='number' name="quantity" value=cart.quantity min='1' max='10' step='1' data-decimals='0' required='' )
+                              input(type="hidden", name="productId" value=cart.productId)
+
+                            // End .cart-product-quantity
+                          td.total-col= cart.product.price*cart.quantity
+                            |.000đ
+                          - Subtotal=Subtotal+ cart.product.price*cart.quantity
+                          td.remove-col
+                            a.btn-remove(href=`/carts/${cart.productId}?_method=DETETE`)
+                                  i.icon-close
+                      .cart-bottom
+                        button(type="submit" ).btn.btn-outline-dark-2
+                          span UPDATE CART
+                          i.icon-refresh
                 // End .cart-bottom
               // End .col-lg-9
               aside.col-lg-3
@@ -83,7 +77,8 @@ block content
                     tbody
                       tr.summary-subtotal
                         td Subtotal:
-                        td $160.00
+                        td= Subtotal
+                          |.000đ
                       // End .summary-subtotal
                       tr.summary-shipping
                         td Shipping:
@@ -126,7 +121,7 @@ block content
                   // End .table table-summary
                   a.btn.btn-outline-primary-2.btn-order.btn-block(href='checkout.html') PROCEED TO CHECKOUT
                 // End .summary
-                a.btn.btn-outline-dark-2.btn-block.mb-3(href='category.html')
+                a.btn.btn-outline-dark-2.btn-block.mb-3(href='/prusers')
                   span CONTINUE SHOPPING
                   i.icon-refresh
               // End .col-lg-3

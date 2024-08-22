@@ -6,17 +6,30 @@ export class ProductControllerUser extends ApplicationController {
   public async index(req: Request, res: Response) {
     const user = await models.user.findById(req.session.userId);
 
-    const currentPage=req.params.currentPage ? +req.params.currentPage: 1
-    const pageSize=req.params.pageSize ? +req.params.pageSize: 12
-
+    const currentPage = req.body.currentPage
+      ? +req.body.currentPage
+      : req.query.currentPage
+      ? +req.query.currentPage
+      : 1;
+    const pageSize = req.body.pageSize
+      ? +req.body.pageSize
+      : req.query.pageSize
+      ? +req.query.pageSize
+      : 12;
     const products = await models.product.findAll({
-      where:{},
+      where: {},
       offset: currentPage,
       limit: pageSize,
       include: [{ model: models.category }],
     });
     const categories = await models.category.findAll();
-    res.render("userview/product.view/index", { products, categories ,user});
+    res.render("userview/product.view/index", {
+      products,
+      categories,
+      user,
+      currentPage,
+      pageSize,
+    });
   }
   public async show(req: Request, res: Response) {
     const { id } = req.params;

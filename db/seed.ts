@@ -5,9 +5,11 @@ import { convertFileToBase64 } from "../configs/fileUpload";
 const seedProduct = async()=>{
   const data=[];
   for(let i = 0; i < 1000; i++){
-    const imageramdom ={
-      path: `C:/Hoa/bookstors/app/assets/images/products/product-${Math.floor(Math.random()*10)+1}.jpg`
-    }as Express.Multer.File;
+    const imageramdom = {
+      path: `D:/bookstors/app/assets/images/products/product-${
+        Math.floor(Math.random() * 10) + 1
+      }.jpg`,
+    } as Express.Multer.File;
     const image =convertFileToBase64(imageramdom)
     data.push({
       name: faker.commerce.productName(),

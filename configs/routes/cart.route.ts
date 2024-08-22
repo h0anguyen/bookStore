@@ -8,15 +8,11 @@ export class CartRoute {
   private static cartController = new CartController();
 
   public static draw() {
-    this.path.use(this.cartController.validateUserLogin)
+    this.path.route("/update").patch(this.cartController.update);
+    this.path.route("/:id").get(this.cartController.detroy);
 
     Route.resource(this.path, this.cartController, {
-      only: [
-        RestActions.Index,
-        RestActions.Create,
-        RestActions.Destroy,
-        RestActions.Update,
-      ],
+      only: [RestActions.Index, RestActions.Create],
     });
     return this.path;
   }

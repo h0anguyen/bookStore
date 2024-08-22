@@ -54,10 +54,13 @@ block content
                           a(href=`/prusers/${product.id}`)
                             if(product.image)
                               img.product-image#products-list-view(src=`data:image/png;base64,${product.image.toString('base64')}`, alt=`product_${product.name}` )
-
-                          .product-action
-                            a.btn-product.btn-cart(href='/carts')
+                          
+                          form(action="/carts", method="post").product-action
+                            input(type="hidden", name="quantity" value="1")
+                            input(type="hidden", name="productId" value=product.id)
+                            button.btn-product.border-0.btn-cart(type="submit")
                               span add to cart
+
                           // End .product-action
                         // End .product-media
                         .product-body
@@ -85,23 +88,23 @@ block content
               // End .products
               nav(aria-label='Page navigation')
                 ul.pagination.justify-content-center
-                    li.page-item.disabled
-                      a.page-link.page-link-prev(href=`#` aria-label='Previous' tabindex='-1' aria-disabled='true')
-                        span(aria-hidden='true')
-                          i.icon-long-arrow-left
-                        | Prev
+                  li.page-item(class=`${currentPage <= 1 ? 'disabled' : ''}`)
+                    a.page-link.page-link-prev(href=`/prusers/?pageSize=${pageSize}&currentPage=${currentPage-1}` aria-label='Previous' tabindex='-1' aria-disabled='true')
+                      span(aria-hidden='true')
+                        i.icon-long-arrow-left
+                      | Prev
                   li.page-item.active(aria-current='page')
                     a.page-link(href='#') 1
                   li.page-item
                     a.page-link(href='#') 2
                   li.page-item
                     a.page-link(href='#') 3
-                  li.page-item-total of 6
-                    li.page-item
-                    a.page-link.page-link-next(href=`#` aria-label='Next')
-                      | Next 
-                      span(aria-hidden='true')
-                        i.icon-long-arrow-right
+                  li.page-item-total of 6s
+                  li.page-item(class=`${ products.length < pageSize ? 'disabled' : ''}`)
+                  a.page-link.page-link-next(href=`/prusers/?pageSize=${pageSize}&currentPage=${currentPage+1}` aria-label='Next')
+                    | Next 
+                    span(aria-hidden='true')
+                      i.icon-long-arrow-right
             // End .col-lg-9
             aside.col-lg-3.order-lg-first
               .sidebar.sidebar-shop
