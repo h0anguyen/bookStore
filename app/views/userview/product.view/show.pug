@@ -47,31 +47,33 @@ block content
                 // End .product-gallery
               // End .col-md-6
               .col-md-6
-                .product-details
-                  h1.product-title= product.name
-                  // End .product-title
-                  .ratings-container
-                    .ratings
-                      .ratings-val(style='width: 80%;')
-                      // End .ratings-val
-                    // End .ratings
-                    a#review-link.ratings-text(href='#product-review-link') ( 2 Reviews )
-                  // End .rating-container
-                  .product-price= product.price
-                    |.000đ
-                  // End .product-price
-                  .product-content
-                    p= product.description
-                  // End .product-content
-                  .details-filter-row.details-row-size
-                    label(for='qty') Qty:
-                    .product-details-quantity
-                      input#qty.form-control(type='number' value='1' min='1' max='20' step='1' data-decimals='0' required='')
-                    // End .product-details-quantity
-                  // End .details-filter-row
-                  .product-details-action
-                    a.btn-product.btn-cart(href='#')
-                      span add to cart
+                form(action="/carts", method="post") 
+                  .product-details
+                    h1.product-title= product.name
+                    // End .product-title
+                    .ratings-container
+                      .ratings
+                        .ratings-val(style='width: 80%;')
+                        // End .ratings-val
+                      // End .ratings
+                      a#review-link.ratings-text(href='#product-review-link') ( 2 Reviews )
+                    // End .rating-container
+                    .product-price= product.price
+                      |.000đ
+                    // End .product-price
+                    .product-content
+                      p= product.description
+                    // End .product-content
+                    .details-filter-row.details-row-size
+                      label(for='qty') Qty:
+                      .product-details-quantity
+                        input#qty.form-control(type='number' name="quantity" value='1' min='1' max='20' step='1' data-decimals='0' required='')
+                      // End .product-details-quantity
+                    // End .details-filter-row
+                    .product-details-action
+                      input(type="hidden", name="productId" value=product.id)
+                      button.btn-product.btn-cart(type="submit")
+                        span add to cart
                   // End .product-details-action
                   .product-details-footer
                     .product-cat
