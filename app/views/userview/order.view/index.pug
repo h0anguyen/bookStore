@@ -1,0 +1,161 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    include ../partials/header
+    main.main
+      .page-header.text-center(style="background-image: url('assets/images/page-header-bg.jpg')")
+        .container
+          h1.page-title
+            | Checkout
+            span Shop
+        // End .container
+      // End .page-header
+      nav.breadcrumb-nav(aria-label='breadcrumb')
+        .container
+          ol.breadcrumb
+            li.breadcrumb-item
+              a(href='index.html') Home
+            li.breadcrumb-item
+              a(href='#') Shop
+            li.breadcrumb-item.active(aria-current='page') Checkout
+        // End .container
+      // End .breadcrumb-nav
+      .page-content
+        .checkout
+          .container
+            form(action='#')
+              .row
+                .col-lg-9
+                  h2.checkout-title Billing Details
+                  // End .checkout-title
+                  .row
+                    .col-sm-12
+                      label Name *
+                      input.form-control(type='text' required='' name="name")
+                    // End .col-sm-6
+                  // End .row
+                  label Street address *
+                  input.form-control(type='text' name='address' placeholder='House number and Street name' required='')
+                  .row
+                    .col-sm-6
+                      label Email *
+                      input.form-control(type='text' required='')
+                    // End .col-sm-6
+                    .col-sm-6
+                      label Phone *
+                      input.form-control(type='tel' required='' name='phoneNumber')
+                    // End .col-sm-6
+                  // End .row
+                  label receiver Name *
+                  input.form-control(type='email' required='')
+                  label Order notes (optional)
+                  textarea.form-control(cols='30' rows='4' placeholder='Notes about your order, e.g. special notes for delivery')
+                // End .col-lg-9
+                aside.col-lg-3
+                  .summary
+                    h3.summary-title Your Order
+                    // End .summary-title
+                    table.table.table-summary
+                      thead
+                        tr
+                          th Product
+                          th Total
+                      tbody
+                        tr
+                          td
+                            a(href='#') Beige knitted elastic runner shoes
+                          td $84.00
+                        tr
+                          td
+                            a(href='#') Blue utility pinafore denimdress
+                          td $76,00
+                        tr.summary-subtotal
+                          td Subtotal:
+                          td $160.00
+                        // End .summary-subtotal
+                        tr
+                          td Shipping:
+                          td Free shipping
+                        tr.summary-total
+                          td Total:
+                          td $160.00
+                        // End .summary-total
+                    // End .table table-summary
+                    #accordion-payment.accordion-summary
+                      .card
+                        #heading-1.card-header
+                          h2.card-title
+                            a(role='button' data-toggle='collapse' href='#collapse-1' aria-expanded='true' aria-controls='collapse-1')
+                              | Direct bank transfer
+                        // End .card-header
+                        #collapse-1.collapse.show(aria-labelledby='heading-1' data-parent='#accordion-payment')
+                          .card-body
+                            | Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                          // End .card-body
+                        // End .collapse
+                      // End .card
+                      .card
+                        #heading-2.card-header
+                          h2.card-title
+                            a.collapsed(role='button' data-toggle='collapse' href='#collapse-2' aria-expanded='false' aria-controls='collapse-2')
+                              | Check payments
+                        // End .card-header
+                        #collapse-2.collapse(aria-labelledby='heading-2' data-parent='#accordion-payment')
+                          .card-body
+                            | Ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis.
+                          // End .card-body
+                        // End .collapse
+                      // End .card
+                      .card
+                        #heading-3.card-header
+                          h2.card-title
+                            a.collapsed(role='button' data-toggle='collapse' href='#collapse-3' aria-expanded='false' aria-controls='collapse-3')
+                              | Cash on delivery
+                        // End .card-header
+                        #collapse-3.collapse(aria-labelledby='heading-3' data-parent='#accordion-payment')
+                          .card-body
+                            | Quisque volutpat mattis eros. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.
+                          // End .card-body
+                        // End .collapse
+                      // End .card
+                      .card
+                        #heading-4.card-header
+                          h2.card-title
+                            a.collapsed(role='button' data-toggle='collapse' href='#collapse-4' aria-expanded='false' aria-controls='collapse-4')
+                              | PayPal 
+                              small.float-right.paypal-link What is PayPal?
+                        // End .card-header
+                        #collapse-4.collapse(aria-labelledby='heading-4' data-parent='#accordion-payment')
+                          .card-body
+                            | Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
+                          // End .card-body
+                        // End .collapse
+                      // End .card
+                      .card
+                        #heading-5.card-header
+                          h2.card-title
+                            a.collapsed(role='button' data-toggle='collapse' href='#collapse-5' aria-expanded='false' aria-controls='collapse-5')
+                              | Credit Card (Stripe)
+                              img(src='assets/images/payments-summary.png' alt='payments cards')
+                        // End .card-header
+                        #collapse-5.collapse(aria-labelledby='heading-5' data-parent='#accordion-payment')
+                          .card-body
+                            | Donec nec justo eget felis facilisis fermentum.Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Lorem ipsum dolor sit ame.
+                          // End .card-body
+                        // End .collapse
+                      // End .card
+                    // End .accordion
+                    button.btn.btn-outline-primary-2.btn-order.btn-block(type='submit')
+                      span.btn-text Place Order
+                      span.btn-hover-text Proceed to Checkout
+                  // End .summary
+                // End .col-lg-3
+              // End .row
+          // End .container
+        // End .checkout
+      // End .page-content
+    // End .main
+
+    include ../partials/footer
+
