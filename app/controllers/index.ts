@@ -8,6 +8,8 @@ export * from "./order.controller";
 export * from "./product.controller";
 export * from "./product.controller.user";
 export * from "./user.controller";
+export * from "./user.controller.user";
+
 
 
 

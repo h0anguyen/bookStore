@@ -10,7 +10,7 @@ export class OrderRoute {
   public static draw() {
     // bước 1
     Route.resource(this.path, this.OrderController, {
-      only: [RestActions.Index],
+      only: [RestActions.Index, RestActions.Create],
     });
 
     return this.path;

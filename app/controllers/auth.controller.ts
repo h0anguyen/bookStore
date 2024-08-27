@@ -101,16 +101,25 @@ export class AuthController extends ApplicationController {
   }
   public async logIn(req: Request, res: Response){
     const { email, password } = req.body;
-    const checkemail= await models.user.findOne({
-      where: {
-        email
-      },
-    }
-  )
-  // if(checkemail){
-  //   if(checkemail.password === password){
 
-  //   }
-  // }
+    const checkUser = (await models.user.findOne({
+      where: {
+        email,
+      },
+    })) as UserInstance;
+    if (!checkUser) {
+      req.flash("errors", { msg: "Email is not found." });
+      res.redirect("/auth");
+    } else {
+      if (checkUser.password === password) {
+        req.session.userId = checkUser.id;
+
+        req.flash("success", { msg: "Login success!!!" });
+        res.redirect("/");
+      } else {
+        req.flash("errors", { msg: "Password is not found." });
+        res.redirect("/auth");
+      }
+    }
   }
 }

@@ -93,21 +93,35 @@ export class CartController extends ApplicationController {
   public async update(req: Request, res: Response) {
     const { quantity, productId } = req.body;
     const userId = req.session.userId;
-
-    for (let i = 0; i < productId.length; i++) {
-      await models.cart.update(
-        {
-          quantity: quantity[i],
-        },
-        {
-          where: {
-            userId,
-            productId: productId[i],
-          },
+    if (productId) {
+      if (Array.isArray(productId)) {
+        for (let i = 0; i < productId.length; i++) {
+          await models.cart.update(
+            {
+              quantity: quantity[i],
+            },
+            {
+              where: {
+                userId,
+                productId: productId[i],
+              },
+            }
+          );
         }
-      );
+      } else {
+        await models.cart.update(
+          {
+            quantity,
+          },
+          {
+            where: {
+              userId,
+              productId,
+            },
+          }
+        );
+      }
     }
-
     req.flash("success", { msg: `Udpate success` });
     res.redirect("/carts");
   }

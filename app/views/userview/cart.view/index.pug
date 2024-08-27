@@ -36,6 +36,7 @@ block content
                       th
                   tbody
                   - Subtotal=0;
+                  - Producttotal=0;
                     form(action="/carts/update?_method=PATCH", method="post") 
                       each cart in carts
                         tr
@@ -51,6 +52,7 @@ block content
                             // End .product
                           td.price-col= cart.product.price
                             |.000đ
+                            
                           td.quantity-col
                             .cart-product-quantity
                               input.form-control(type='number' name="quantity" value=cart.quantity min='1' max='10' step='1' data-decimals='0' required='' )
@@ -60,6 +62,7 @@ block content
                           td.total-col= cart.product.price*cart.quantity
                             |.000đ
                           - Subtotal=Subtotal+ cart.product.price*cart.quantity
+                          - Producttotal=Producttotal+1;
                           td.remove-col
                             a.btn-remove(href=`/carts/${cart.productId}?_method=DETETE`)
                                   i.icon-close
@@ -76,50 +79,50 @@ block content
                   table.table.table-summary
                     tbody
                       tr.summary-subtotal
+                        td Quantity Products:
+                        td= Producttotal
+                      // End .summary-subtotal
+                      //- tr.summary-shipping
+                      //-   td Shipping:
+                      //-   td &nbsp;
+                      //- tr.summary-shipping-row
+                      //-   td
+                      //-     .custom-control.custom-radio
+                      //-       input#free-shipping.custom-control-input(type='radio' name='shipping')
+                      //-       label.custom-control-label(for='free-shipping') Free Shipping
+                      //-     // End .custom-control
+                      //-   td $0.00
+                      //- // End .summary-shipping-row
+                      //- tr.summary-shipping-row
+                      //-   td
+                      //-     .custom-control.custom-radio
+                      //-       input#standart-shipping.custom-control-input(type='radio' name='shipping')
+                      //-       label.custom-control-label(for='standart-shipping') Standart:
+                      //-     // End .custom-control
+                      //-   td $10.00
+                      //- // End .summary-shipping-row
+                      //- tr.summary-shipping-row
+                      //-   td
+                      //-     .custom-control.custom-radio
+                      //-       input#express-shipping.custom-control-input(type='radio' name='shipping')
+                      //-       label.custom-control-label(for='express-shipping') Express:
+                      //-     // End .custom-control
+                      //-   td $20.00
+                      //- // End .summary-shipping-row
+                      //- tr.summary-shipping-estimate
+                      //-   td
+                      //-     | Estimate for Your Country
+                      //-     br
+                      //-     a(href='dashboard.html') Change address
+                      //-   td &nbsp;
+                      //- // End .summary-shipping-estimate
+                      tr.summary-total
                         td Subtotal:
                         td= Subtotal
                           |.000đ
-                      // End .summary-subtotal
-                      tr.summary-shipping
-                        td Shipping:
-                        td &nbsp;
-                      tr.summary-shipping-row
-                        td
-                          .custom-control.custom-radio
-                            input#free-shipping.custom-control-input(type='radio' name='shipping')
-                            label.custom-control-label(for='free-shipping') Free Shipping
-                          // End .custom-control
-                        td $0.00
-                      // End .summary-shipping-row
-                      tr.summary-shipping-row
-                        td
-                          .custom-control.custom-radio
-                            input#standart-shipping.custom-control-input(type='radio' name='shipping')
-                            label.custom-control-label(for='standart-shipping') Standart:
-                          // End .custom-control
-                        td $10.00
-                      // End .summary-shipping-row
-                      tr.summary-shipping-row
-                        td
-                          .custom-control.custom-radio
-                            input#express-shipping.custom-control-input(type='radio' name='shipping')
-                            label.custom-control-label(for='express-shipping') Express:
-                          // End .custom-control
-                        td $20.00
-                      // End .summary-shipping-row
-                      tr.summary-shipping-estimate
-                        td
-                          | Estimate for Your Country
-                          br
-                          a(href='dashboard.html') Change address
-                        td &nbsp;
-                      // End .summary-shipping-estimate
-                      tr.summary-total
-                        td Total:
-                        td $160.00
                       // End .summary-total
                   // End .table table-summary
-                  a.btn.btn-outline-primary-2.btn-order.btn-block(href='checkout.html') PROCEED TO CHECKOUT
+                  a.btn.btn-outline-primary-2.btn-order.btn-block(href='/orders') PROCEED TO CHECKOUT
                 // End .summary
                 a.btn.btn-outline-dark-2.btn-block.mb-3(href='/prusers')
                   span CONTINUE SHOPPING

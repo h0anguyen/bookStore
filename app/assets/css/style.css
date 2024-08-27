@@ -19902,3 +19902,7 @@ button:focus {
   overflow: hidden;
   height: 43px;
 }
+.userInfor {
+  display: flex;
+  align-items: center;
+}

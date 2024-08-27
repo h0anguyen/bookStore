@@ -10,6 +10,7 @@ import { OrderRoute } from "./order.route";
 import { ProductRoute } from "./product.route";
 import { ProductRouteUser } from "./product.route.user";
 import { UserRoute } from "./user.route";
+import { UserRouteUser } from "./user.route.user";
 
 export class Route {
   private static path = Router();
@@ -24,6 +25,7 @@ export class Route {
     this.path.use("/prusers", ProductRouteUser.draw());
     this.path.use("/carts", CartRoute.draw());
     this.path.use("/orders", OrderRoute.draw());
+    this.path.use("/userinfors", UserRouteUser.draw());
 
     Route.resource(this.path, this.homeController, {
       only: [RestActions.Index],
