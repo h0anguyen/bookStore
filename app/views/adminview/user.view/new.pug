@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .container-fluid.px-4
+    form(action='/api/v1/auth/signup' method="post")
+      .form-group
+        label(for='register-email-2') Full name*
+        input#register-email-2.form-control(type='text' name='fullName' required='')
+      .form-group
+        label(for='register-email-2') username *
+        input#register-email-2.form-control(type='text' name='username' required='')
+      .form-group
+        label(for='register-email-2') Your email address *
+        input#register-email-2.form-control(type='email' name='email' required='')
+      // End .form-group
+      .form-group
+        label(for='register-password-2') Password *
+        input#register-password-2.form-control(type='password' name='password' required='')
+      .form-group
+        label(for='register-password-2') Confirm Password *
+        input#register-password-2.form-control(type='password' name='confirmpassword' required='')
+      // End .form-group
+      .form-footer
+        button.btn.btn-outline-primary-2(type='submit')
+          span SIGN UP
+          i.icon-long-arrow-right
+        .custom-control.custom-checkbox
+          input#register-policy-2.custom-control-input(type='checkbox' required='')
+          label.custom-control-label(for='register-policy-2')
+            | I agree to the 
+            a(href='#') privacy policy
+            |  *
+        // End .custom-checkbox
+      // End .form-footer
+    
+
+  
+
+  

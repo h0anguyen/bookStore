@@ -14,10 +14,10 @@ block content
                   a#register-tab-2.nav-link.active(data-toggle='tab' href='#register-2' role='tab' aria-controls='register-2' aria-selected='true') Register
               .tab-content
                 #signin-2.tab-pane.fade(role='tabpanel' aria-labelledby='signin-tab-2')
-                  form(action='/auth/login' method="post")
+                  form(action='/api/v1/auth/signin' method="post")
                     .form-group
-                      label(for='singin-email-2') Email address *
-                      input#singin-email-2.form-control(type='email' name='email' required='')
+                      label(for='singin-email-2') Username *
+                      input#singin-email-2.form-control(type='text' name='username' required='')
                     // End .form-group
                     .form-group
                       label(for='singin-password-2') Password *
@@ -50,14 +50,23 @@ block content
                   // End .form-choice
                 // .End .tab-pane
                 #register-2.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='register-tab-2')
-                  form(action='#')
+                  form(action='/api/v1/auth/signup' method="post")
+                    .form-group
+                      label(for='register-email-2') Full name*
+                      input#register-email-2.form-control(type='text' name='fullName' required='')
+                    .form-group
+                      label(for='register-email-2') username *
+                      input#register-email-2.form-control(type='text' name='username' required='')
                     .form-group
                       label(for='register-email-2') Your email address *
-                      input#register-email-2.form-control(type='email' name='register-email' required='')
+                      input#register-email-2.form-control(type='email' name='email' required='')
                     // End .form-group
                     .form-group
                       label(for='register-password-2') Password *
-                      input#register-password-2.form-control(type='password' name='register-password' required='')
+                      input#register-password-2.form-control(type='password' name='password' required='')
+                    .form-group
+                      label(for='register-password-2') Confirm Password *
+                      input#register-password-2.form-control(type='password' name='confirmpassword' required='')
                     // End .form-group
                     .form-footer
                       button.btn.btn-outline-primary-2(type='submit')

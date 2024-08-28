@@ -10,11 +10,11 @@ export = {
         type: Sequelize.INTEGER,
       },
 
-      name: {
+      fullName: {
         type: Sequelize.STRING,
       },
 
-      avatarUrl: {
+      username: {
         type: Sequelize.STRING,
       },
 
@@ -22,12 +22,12 @@ export = {
         type: Sequelize.STRING,
       },
 
-      password: {
-        type: Sequelize.STRING,
+      iam_role: {
+        type: Sequelize.INTEGER,
       },
 
-      role: {
-        type: Sequelize.INTEGER,
+      hash_pwd: {
+        type: Sequelize.STRING,
       },
 
       createdAt: {

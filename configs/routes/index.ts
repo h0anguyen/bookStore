@@ -1,31 +1,16 @@
-import env from "@configs/env";
 import { HomeController } from "@controllers";
 import { Router } from "express";
 import { RestActions } from "../enum";
 import { AuthRoute } from "./auth.route";
-import { CartRoute } from "./cart.route";
-import { CategoryRoute } from "./category.route";
-import { DevRoute } from "./dev.route";
-import { OrderRoute } from "./order.route";
-import { ProductRoute } from "./product.route";
-import { ProductRouteUser } from "./product.route.user";
 import { UserRoute } from "./user.route";
-import { UserRouteUser } from "./user.route.user";
 
 export class Route {
   private static path = Router();
   private static homeController = new HomeController();
 
   public static draw() {
-    if (env.nodeEnv === "development") this.path.use("/dev", DevRoute.draw());
-    this.path.use("/auth", AuthRoute.draw());
-    this.path.use("/users", UserRoute.draw());
-    this.path.use("/categories", CategoryRoute.draw());
-    this.path.use("/products", ProductRoute.draw());
-    this.path.use("/prusers", ProductRouteUser.draw());
-    this.path.use("/carts", CartRoute.draw());
-    this.path.use("/orders", OrderRoute.draw());
-    this.path.use("/userinfors", UserRouteUser.draw());
+    this.path.use("/api/v1/auth", AuthRoute.draw());
+    this.path.use("/api/v1/users", UserRoute.draw());
 
     Route.resource(this.path, this.homeController, {
       only: [RestActions.Index],

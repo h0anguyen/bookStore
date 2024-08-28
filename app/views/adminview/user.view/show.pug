@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .container-fluid.px-4
+    .row
+      .col-6
+        h1.mt-4 Book list
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Users :
+    .card.mb-4
+      .card-header
+        i.fas.fa-table.me-1
+        |Users list
+      .card-body
+        table#datatablesSimple
+          thead
+            tr
+              th Id
+              th title
+              th author
+              th publishedDate
+          tbody
+            each book in books
+              tr
+                td= book.id
+                td= book.title
+                td= book.author
+                td= book.publishedDate 
+
+                
+
+                

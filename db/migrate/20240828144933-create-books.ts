@@ -2,7 +2,7 @@ import { QueryInterface, SequelizeStatic } from "sequelize";
 
 export = {
   up: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.createTable("carts", {
+    return queryInterface.createTable("Books", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,15 +10,19 @@ export = {
         type: Sequelize.INTEGER,
       },
 
+      title: {
+        type: Sequelize.STRING,
+      },
+
+      author: {
+        type: Sequelize.STRING,
+      },
+
+      publishedDate: {
+        type: Sequelize.DATE,
+      },
+
       userId: {
-        type: Sequelize.INTEGER,
-      },
-
-      productId: {
-        type: Sequelize.INTEGER,
-      },
-
-      quantity: {
         type: Sequelize.INTEGER,
       },
 
@@ -35,6 +39,6 @@ export = {
   },
 
   down: (queryInterface: QueryInterface, Sequelize: SequelizeStatic) => {
-    return queryInterface.dropTable("carts");
+    return queryInterface.dropTable("Books");
   },
 };

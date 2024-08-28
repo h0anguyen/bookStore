@@ -1,124 +1,54 @@
-import env from "@configs/env";
 import models from "@models";
 import { Role, UserInstance } from "@models/user";
-import axios from "axios";
 import { Request, Response } from "express";
 import { ApplicationController } from ".";
 
 export class AuthController extends ApplicationController {
-  public async loginWithGoogle(req: Request, res: Response) {
-    const a = env;
-    res.redirect(
-      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${env.googleClientId}&redirect_uri=${env.googleRedirectUri}&response_type=code&scope=profile email`
-    );
-  }
-
-  public async loginWithGoogleRedirect(req: Request, res: Response) {
-    const { code } = req.query;
-    const {
-      data: { access_token },
-    } = await axios.post("https://oauth2.googleapis.com/token", {
-      client_id: env.googleClientId,
-      client_secret: env.googleClientSecret,
-      code,
-      redirect_uri: env.googleRedirectUri,
-      grant_type: "authorization_code",
-    });
-
-    const { data: googleUser } = await axios.get(
-      "https://www.googleapis.com/oauth2/v1/userinfo",
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    );
-
-    const loginUser = (await models.user.findOne({
-      where: {
-        email: googleUser.email,
-      },
-    })) as UserInstance;
-
-    if (!loginUser) {
-      const newUser = (await models.user.create({
-        name: googleUser.name,
-        email: googleUser.email,
-        avatarUrl: googleUser.picture,
-        role: Role.USER,
-        password: null,
-      })) as UserInstance;
-
-      req.session.userId = newUser.id;
-    } else {
-      await models.user.update(
-        {
-          name: googleUser.name,
-          email: googleUser.email,
-          avatarUrl: googleUser.picture,
-        },
-        {
-          where: {
-            id: loginUser.id,
-          },
-        }
-      );
-
-      req.session.userId = loginUser.id;
-    }
-
-    req.flash("success", { msg: "Login successfully" });
-
-    res.redirect("/");
-  }
-
   public async index(req: Request, res: Response) {
     res.render("userview/auth.view/index");
   }
   public async create(req: Request, res: Response) {
-    const { email, password } = req.body;
-
-    const user = await models.user.findOne({
-      where: {
-        email,
-        password,
-      },
-    });
-    if (user) {
-      req.flash("success", { msg: "Login successfully" });
-    } else {
-      req.flash("errors", { msg: "User is not found." });
+    const { fullName, username, email, password, confirmpassword } = req.body;
+    if (confirmpassword !== password) {
+      req.flash("errors", { msg: "Confirm password is not match" });
+      return res.redirect("/api/v1/auth");
     }
-    res.redirect("/");
+    const user = (await models.user.create({
+      fullName,
+      username,
+      email,
+      iam_role: Role.MEMBER,
+      hash_pwd: password,
+    })) as UserInstance;
+
+    if (user) {
+      req.session.userId = user.id;
+      res.redirect("/api/v1/users");
+    } else {
+      req.flash("errors", { msg: "Confirm password is not match" });
+      res.redirect("/api/v1/auth");
+    }
   }
-  public async destroy(req: Request, res: Response) {
-    req.session.destroy((err: Error) => {
-      if (err) console.log(err);
-      else {
-        res.redirect("https://accounts.google.com/logout");
-      }
-    });
-  }
-  public async logIn(req: Request, res: Response){
-    const { email, password } = req.body;
+  public async logIn(req: Request, res: Response) {
+    const { username, password } = req.body;
 
     const checkUser = (await models.user.findOne({
       where: {
-        email,
+        username,
       },
     })) as UserInstance;
     if (!checkUser) {
       req.flash("errors", { msg: "Email is not found." });
       res.redirect("/auth");
     } else {
-      if (checkUser.password === password) {
+      if (checkUser.hash_pwd === password) {
         req.session.userId = checkUser.id;
 
         req.flash("success", { msg: "Login success!!!" });
-        res.redirect("/");
+        res.redirect("/api/v1/users");
       } else {
         req.flash("errors", { msg: "Password is not found." });
-        res.redirect("/auth");
+        res.redirect("/api/v1/auth");
       }
     }
   }

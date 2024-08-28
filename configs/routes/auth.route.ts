@@ -8,17 +8,12 @@ export class AuthRoute {
   private static authController = new AuthController();
 
   public static draw() {
-    this.path.route("/google").get(this.authController.loginWithGoogle);
-    this.path
-      .route("/google/callback")
-      .get(this.authController.loginWithGoogleRedirect);
-      this.path
-      .route("/login")
-      .post(this.authController.logIn);
+      this.path.route("/signup").post(this.authController.create);
+      this.path.route("/signin").post(this.authController.logIn);
 
-    Route.resource(this.path, this.authController, {
-      only: [RestActions.Destroy, RestActions.Index],
-    });
+      Route.resource(this.path, this.authController, {
+        only: [RestActions.Index],
+      });
 
     return this.path;
   }

@@ -7,8 +7,6 @@ block content
         h1.mt-4 Users
         ol.breadcrumb.mb-4
           li.breadcrumb-item.active Users
-      .col-6
-        button.btn.btn-primary.add(type="submit") Add User
     .card.mb-4
       .card-header
         i.fas.fa-table.me-1
@@ -18,29 +16,29 @@ block content
           thead
             tr
               th Id
-              th Name
+              th Full Name
+              th User Name
               th Email
               th Role
-              th Create date
+              th password
               th 
-          tfoot
-              th Id
-              th Name
-              th Email
-              th Role
-              th Create date
-              th 
+
           tbody
             each user in users
               tr
                 td= user.id
-                td= user.name
+                td= user.fullName
+                td= user.username
                 td= user.email 
-                td= user.role 
-                td= user.createdAt
-                td 
-                  form(action=`/users/${user.id}?_method=DELETE`, method="post")
-                    button.btn.btn-danger(type="submit") Delete
+                td= user.iam_role 
+                td= user.hash_pwd
+                td.d.d-flex.justify-content-around
+                  a(href=`/api/v1/users/${user.id}/books`).btn.btn-primary Details 
+                  a(href=`/api/v1/users/${user.id}/new`).btn.btn-primary add books 
+
+                  
+
+
                 
 
                 

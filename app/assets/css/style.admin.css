@@ -13183,3 +13183,7 @@ body {
   margin-top: 4em;
 
 }
+.d {
+  display: flex;
+  justify-content: space-around;
+}
