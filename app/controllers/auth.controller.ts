@@ -39,7 +39,7 @@ export class AuthController extends ApplicationController {
     })) as UserInstance;
     if (!checkUser) {
       req.flash("errors", { msg: "Email is not found." });
-      res.redirect("/auth");
+      res.redirect("/api/v1/auth");
     } else {
       if (checkUser.hash_pwd === password) {
         req.session.userId = checkUser.id;

@@ -8,7 +8,9 @@ export class AuthRoute {
   private static authController = new AuthController();
 
   public static draw() {
-      this.path.route("/signup").post(this.authController.create);
+      this.path
+        .route("/signup")
+        .post(this.authController.checkEmailSignup, this.authController.create);
       this.path.route("/signin").post(this.authController.logIn);
 
       Route.resource(this.path, this.authController, {

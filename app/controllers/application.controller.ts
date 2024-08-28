@@ -1,7 +1,6 @@
 import models from "@models";
 import { Role } from "@models/user";
 import { NextFunction, Request, Response } from "express";
-
 export class ApplicationController {
   public async validateUserLogin(
     req: Request,
@@ -23,6 +22,34 @@ export class ApplicationController {
 
     req.user = user;
     next();
+  }
+  public async checkEmailSignup(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { email, username } = req.body;
+
+    const checkEmail = await models.user.findOne({
+      where: {
+        email,
+      },
+    });
+
+    const checkusername = await models.user.findOne({
+      where: {
+        username,
+      },
+    });
+
+    if (checkEmail || checkusername) {
+      const mess = 1;
+      return res.render("userview/auth.view/index", { mess });
+    } else {
+      const mess = 0;
+
+      next();
+    }
   }
 
   public async validateAdmin(req: Request, res: Response, next: NextFunction) {
