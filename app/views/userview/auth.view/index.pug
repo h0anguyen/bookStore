@@ -9,12 +9,12 @@ block content
             .form-tab
               ul.nav.nav-pills.nav-fill(role='tablist')
                 li.nav-item
-                  a#signin-tab-2.nav-link(data-toggle='tab' href='#signin-2' role='tab' aria-controls='signin-2' aria-selected='false') Sign In
+                  a#signin-tab-2.nav-link.active(data-toggle='tab' href='#signin-2' role='tab' aria-controls='signin-2' aria-selected='true') Sign In
                 li.nav-item
-                  a#register-tab-2.nav-link.active(data-toggle='tab' href='#register-2' role='tab' aria-controls='register-2' aria-selected='true') Register
+                  a#register-tab-2.nav-link(data-toggle='tab' href='#register-2' role='tab' aria-controls='register-2' aria-selected='false') Register
               .tab-content
 
-                #signin-2.tab-pane.fade(role='tabpanel' aria-labelledby='signin-tab-2')
+                #signin-2.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='signin-tab-2') 
                   form(action='/api/v1/auth/signin' method="post")
                     .form-group
                       label(for='singin-email-2') Username *
@@ -50,9 +50,9 @@ block content
                     // End .row
                   // End .form-choice
                 // .End .tab-pane
-                #register-2.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='register-tab-2')
-                  - if(mess==1)
-                    u.text-danger Cannot sign-up with the username or email already existed
+                #register-2.tab-pane.fade(role='tabpanel' aria-labelledby='register-tab-2')
+                  - if(mess)
+                    u.text-danger= mess
                   form(action='/api/v1/auth/signup' method="post")
                     .form-group
                       label(for='register-email-2') Full name*

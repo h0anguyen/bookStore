@@ -2,6 +2,7 @@ import { HomeController } from "@controllers";
 import { Router } from "express";
 import { RestActions } from "../enum";
 import { AuthRoute } from "./auth.route";
+import { BookRoute } from "./book.route";
 import { UserRoute } from "./user.route";
 
 export class Route {
@@ -11,6 +12,7 @@ export class Route {
   public static draw() {
     this.path.use("/api/v1/auth", AuthRoute.draw());
     this.path.use("/api/v1/users", UserRoute.draw());
+    this.path.use("/api/v1/books", BookRoute.draw());
 
     Route.resource(this.path, this.homeController, {
       only: [RestActions.Index],

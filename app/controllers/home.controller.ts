@@ -5,6 +5,7 @@ import models from "../models";
 export class HomeController extends ApplicationController {
   public async index(req: Request, res: Response) {
     const user = await models.user.findById(req.session.userId);
-    res.render("userview/home.view/index", { user });
+    const books = await models.book.findAll();
+    res.render("userview/home.view/index", { user, books });
   }
 }

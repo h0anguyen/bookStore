@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import express, { Express, NextFunction, Request, Response } from "express";
+import flash from "express-flash";
 import session from "express-session";
 import createError from "http-errors";
 import methodOverride from "method-override";
@@ -23,8 +24,6 @@ class Application {
     // Cài đặt template engine
     this.app.set("views", join(resolve("./app"), "views"));
     this.app.set("view engine", "pug");
-    const flash = require("connect-flash");
-    this.app.use(flash());
     // Cài đặt các công cụ giải mã
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());

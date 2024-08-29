@@ -1,0 +1,17 @@
+extends ../layout
+  
+block content
+  .page-wrapper
+    main.main
+      nav.breadcrumb-nav.border-0.mb-0(aria-label='breadcrumb')
+        .container
+      .error-content.text-center(style='background-image: url(assets/images/backgrounds/error-bg.jpg)')
+        .container
+          - if(status)
+            h1.error-title= status
+          - else
+            h1.error-title Error
+          p.text-danger= msg
+          a.btn.btn-outline-primary-2.btn-minwidth-lg(href='/api/v1/auth')
+            span BACK TO SiGN IN
+            i.icon-long-arrow-right

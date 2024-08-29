@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .container-fluid.px-4
+    .row
+      .col-6
+        h1.mt-4 Books list
+        ol.breadcrumb.mb-4
+          li.breadcrumb-item.active Books list
+      .col-6
+        a.btn.btn-primary.add(type="submit" href="/api/v1/books/new" ) Add book
+    .card.mb-4
+      .card-header
+        i.fas.fa-table.me-1
+        |Products list
+      .card-body
+        table#datatablesSimple.table
+          thead
+            tr
+              th Id
+              th title
+              th author
+              th publishedDate
+              th userId 
+              th
+          tbody
+            each book in books
+              tr
+                td= book.id
+                td= book.title
+                td= book.author 
+                td= book.publishedDate 
+                td= book.userId 
+                td
+                  div.d-flex.justify-content-around
+                    form(action=`/products/${product.id}/edit`, method="get")
+                      button.btn.btn-info(type="submit") Edit
+                    form(action=`/products/${product.id}?_method=DELETE`, method="post")
+                      button.btn.btn-danger(type="submit") Delete

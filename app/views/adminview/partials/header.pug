@@ -1,240 +1,94 @@
-header.header
-  .header-top
-    .container
-      .header-left
-        b BOOKSTORE
-      // End .header-left
-      .header-right
-        ul.top-menu
-          li
-            a(href='#') Links
-            ul
-              li
-                a(href='tel:#')
-                  i.icon-phone
-                  | Call: +0123 456 789
-              li
-              - if (!user)
-                li
-                  a.nav-link(href='/auth') Login
-              - else
-                li
-                  a(href="/userinfors").userInfor
-                    - if(user.avatarUrl)
-                        img(style='width: 40px; height: 40px; border-radius: 50%' src=`${user.avatarUrl}`)
-                        span= user.name
-                    - else
-                        img(style='width: 40px; height: 40px; border-radius: 50%' src="https://scontent.fhan14-5.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s200x200&_nc_cat=1&ccb=1-7&_nc_sid=136b72&_nc_ohc=ANaUE6Y_shwQ7kNvgEDF7Bf&_nc_ht=scontent.fhan14-5.fna&oh=00_AYBuYkGVVF3ZQEo0td2RNTKwS_m0COnLcvKg1AZlZm6Q-A&oe=66F245FA")
-                        span= user.name
-        // End .top-menu
-      // End .header-right
-    // End .container
-  // End .header-top
-  .header-middle.sticky-header
-    .container
-      .header-left
-        button.mobile-menu-toggler
-          span.sr-only Toggle mobile menu
-          i.icon-bars
-        a.logo(href='/')
-          img(src='/images/logo.png' alt='Molla Logo' width='105' height='25')
-        nav.main-nav
-          ul.menu.sf-arrows
-            li.megamenu-container.active
-              a(href='/') Home
-            li
-              a.sf-with-ul(href='/prusers') Products
-              .megamenu.megamenu-md
-                .row.no-gutters
-                  .col-md-8
-                    .menu-col
-                      .row
-                        .col-md-6
-                          .menu-title Shop with sidebar
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='category-list.html') Shop List
-                            li
-                              a(href='category-2cols.html') Shop Grid 2 Columns
-                            li
-                              a(href='category.html') Shop Grid 3 Columns
-                            li
-                              a(href='category-4cols.html') Shop Grid 4 Columns
-                            li
-                              a(href='category-market.html')
-                                span
-                                  | Shop Market
-                                  span.tip.tip-new New
-                          .menu-title Shop no sidebar
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='category-boxed.html')
-                                span
-                                  | Shop Boxed No Sidebar
-                                  span.tip.tip-hot Hot
-                            li
-                              a(href='category-fullwidth.html') Shop Fullwidth No Sidebar
-                        // End .col-md-6
-                        .col-md-6
-                          .menu-title Product Category
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='product-category-boxed.html') Product Category Boxed
-                            li
-                              a(href='product-category-fullwidth.html')
-                                span
-                                  | Product Category Fullwidth
-                                  span.tip.tip-new New
-                          .menu-title Shop Pages
-                          // End .menu-title
-                          ul
-                            li
-                              a(href='cart.html') Cart
-                            li
-                              a(href='checkout.html') Checkout
-                            li
-                              a(href='wishlist.html') Wishlist
-                            li
-                              a(href='dashboard.html') My Account
-                            li
-                              a(href='#') Lookbook
-                        // End .col-md-6
-                      // End .row
-                    // End .menu-col
-                  // End .col-md-8
-                  .col-md-4
-                    .banner.banner-overlay
-                      a.banner.banner-menu(href='category.html')
-                        img(src='images/menu/banner-1.jpg' alt='Banner')
-                        .banner-content.banner-content-top
-                          .banner-title.text-white
-                            | Last 
-                            br
-                            | Chance
-                            br
-                            span
-                              strong Sale
-                          // End .banner-title
-                        // End .banner-content
-                    // End .banner banner-overlay
-                  // End .col-md-4
-                // End .row
-              // End .megamenu megamenu-md
-            li
-              a(href='about.html') About
-            li
-              a(href='contact.html') Contact
-            li
-              a.sf-with-ul(href='blog.html') Blog
-              ul
-                li
-                  a(href='blog.html') Classic
-                li
-                  a(href='blog-listing.html') Listing
-                li
-                  a(href='#') Grid
-                  ul
-                    li
-                      a(href='blog-grid-2cols.html') Grid 2 columns
-                    li
-                      a(href='blog-grid-3cols.html') Grid 3 columns
-                    li
-                      a(href='blog-grid-4cols.html') Grid 4 columns
-                    li
-                      a(href='blog-grid-sidebar.html') Grid sidebar
-                li
-                  a(href='#') Masonry
-                  ul
-                    li
-                      a(href='blog-masonry-2cols.html') Masonry 2 columns
-                    li
-                      a(href='blog-masonry-3cols.html') Masonry 3 columns
-                    li
-                      a(href='blog-masonry-4cols.html') Masonry 4 columns
-                    li
-                      a(href='blog-masonry-sidebar.html') Masonry sidebar
-                li
-                  a(href='#') Mask
-                  ul
-                    li
-                      a(href='blog-mask-grid.html') Blog mask grid
-                    li
-                      a(href='blog-mask-masonry.html') Blog mask masonry
-                li
-                  a(href='#') Single Post
-                  ul
-                    li
-                      a(href='single.html') Default with sidebar
-                    li
-                      a(href='single-fullwidth.html') Fullwidth no sidebar
-                    li
-                      a(href='single-fullwidth-sidebar.html') Fullwidth with sidebar
-            li
-              a(href='faq.html') F.A.Q
-          // End .menu
-        // End .main-nav
-      // End .header-left
-      .header-right
-        .header-search
-          a.search-toggle(href='#' role='button' title='Search')
-            i.icon-search
-          form(action='#' method='get')
-            .header-search-wrapper
-              label.sr-only(for='q') Search
-              input#q.form-control(type='search' name='q' placeholder='Search in...' required='')
-            // End .header-search-wrapper
-        // End .header-search
-        .dropdown.cart-dropdown
-          a.dropdown-toggle(href='/carts' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' data-display='static')
-            i.icon-shopping-cart
-            span.cart-count 2
-          .dropdown-menu.dropdown-menu-right
-            .dropdown-cart-products
-              .product
-                .product-cart-details
-                  h4.product-title
-                    a(href='product.html') Beige knitted elastic runner shoes
-                  span.cart-product-info
-                    span.cart-product-qty 1
-                    |                                                 x $84.00
-                // End .product-cart-details
-                figure.product-image-container
-                  a.product-image(href='product.html')
-                    img(src='/images/products/cart/product-1.jpg' alt='product')
-                a.btn-remove(href='#' title='Remove Product')
-                  i.icon-close
-              // End .product
-              .product
-                .product-cart-details
-                  h4.product-title
-                    a(href='product.html') Blue utility pinafore denim dress
-                  span.cart-product-info
-                    span.cart-product-qty 1
-                    |                                                 x $76.00
-                // End .product-cart-details
-                figure.product-image-container
-                  a.product-image(href='product.html')
-                    img(src='/images/products/cart/product-2.jpg' alt='product')
-                a.btn-remove(href='#' title='Remove Product')
-                  i.icon-close
-              // End .product
-            // End .cart-product
-            .dropdown-cart-total
-              span Total
-              span.cart-total-price $160.00
-            // End .dropdown-cart-total
-            .dropdown-cart-action
-              a.btn.btn-primary(href='/carts') View Cart
-              a.btn.btn-outline-primary-2(href='checkout.html')
-                span Checkout
-                i.icon-long-arrow-right
-            // End .dropdown-cart-total
-          // End .dropdown-menu
-        // End .cart-dropdown
-      // End .header-right
-    // End .container
-  // End .header-middle
-// End .header
+nav.sb-topnav.navbar.navbar-expand.navbar-dark.bg-dark
+  // Navbar Brand
+  a.navbar-brand.ps-3(href='#') Start Bootstrap
+  // Sidebar Toggle
+  button#sidebarToggle.btn.btn-link.btn-sm.order-1.order-lg-0.me-4.me-lg-0(href='#!')
+    i.fas.fa-bars
+  // Navbar Search
+  form.d-none.d-md-inline-block.form-inline.ms-auto.me-0.me-md-3.my-2.my-md-0
+    .input-group
+      input.form-control(type='text' placeholder='Search for...' aria-label='Search for...' aria-describedby='btnNavbarSearch')
+      button#btnNavbarSearch.btn.btn-primary(type='button')
+        i.fas.fa-search
+  // Navbar
+  ul.navbar-nav.ms-auto.ms-md-0.me-3.me-lg-4
+    li.nav-item.dropdown
+      a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+        i.fas.fa-user.fa-fw
+      ul.dropdown-menu.dropdown-menu-end(aria-labelledby='navbarDropdown')
+        li
+          a.dropdown-item(href='#!') Settings
+        li
+          a.dropdown-item(href='#!') Activity Log
+        li
+          hr.dropdown-divider
+        li
+          a.dropdown-item(href='#!') Logout
+#layoutSidenav
+  #layoutSidenav_nav
+    nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
+      .sb-sidenav-menu
+        .nav
+          .sb-sidenav-menu-heading Admin
+          a.nav-link(href='/')
+            .sb-nav-link-icon
+              i.fas.fa-tachometer-alt
+            |                                 Home
+          .sb-sidenav-menu-heading Page
+          a.nav-link(href='/users')
+            .sb-nav-link-icon
+              i.fas.fa-chart-area
+            |                                 Users
+          a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapsePages' aria-expanded='false' aria-controls='collapsePages')
+            .sb-nav-link-icon
+              i.fas.fa-book-open
+            |                                 Orders
+            .sb-sidenav-collapse-arrow
+              i.fas.fa-angle-down
+          #collapsePages.collapse(aria-labelledby='headingTwo' data-bs-parent='#sidenavAccordion')
+            nav#sidenavAccordionPages.sb-sidenav-menu-nested.nav.accordion
+              a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#pagesCollapseAuth' aria-expanded='false' aria-controls='pagesCollapseAuth')
+                | Authentication
+                .sb-sidenav-collapse-arrow
+                  i.fas.fa-angle-down
+              #pagesCollapseAuth.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordionPages')
+                nav.sb-sidenav-menu-nested.nav
+                  a.nav-link(href='login.html') Login
+                  a.nav-link(href='register.html') Register
+                  a.nav-link(href='password.html') Forgot Password
+              a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#pagesCollapseError' aria-expanded='false' aria-controls='pagesCollapseError')
+                | Error
+                .sb-sidenav-collapse-arrow
+                  i.fas.fa-angle-down
+              #pagesCollapseError.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordionPages')
+                nav.sb-sidenav-menu-nested.nav
+                  a.nav-link(href='401.html') 401 Page
+                  a.nav-link(href='404.html') 404 Page
+                  a.nav-link(href='500.html') 500 Page
+          a.nav-link.collapsed(href='#' data-bs-toggle='collapse' data-bs-target='#collapseLayouts' aria-expanded='false' aria-controls='collapseLayouts')
+            .sb-nav-link-icon
+              i.fas.fa-columns
+            |                                 Categories
+            .sb-sidenav-collapse-arrow
+              i.fas.fa-angle-down
+          #collapseLayouts.collapse(aria-labelledby='headingOne' data-bs-parent='#sidenavAccordion')
+            nav.sb-sidenav-menu-nested.nav
+              each category in categories
+                a.nav-link(href=`/categories/${category.id}`)= category.name                  
+              a.badge.badge-light(href="/categories") All Categories
+          a.nav-link(href='/products')
+            .sb-nav-link-icon
+              i.fas.fa-chart-area
+            |                                 Products
+          .sb-sidenav-menu-heading Addons
+          a.nav-link(href='charts.html')
+            .sb-nav-link-icon
+              i.fas.fa-chart-area
+            |                                 Charts
+          a.nav-link(href='tables.html')
+            .sb-nav-link-icon
+              i.fas.fa-table
+            |                                 Tables
+  #layoutSidenav_content
+    main
+     block content

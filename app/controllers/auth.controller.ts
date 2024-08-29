@@ -10,23 +10,27 @@ export class AuthController extends ApplicationController {
   public async create(req: Request, res: Response) {
     const { fullName, username, email, password, confirmpassword } = req.body;
     if (confirmpassword !== password) {
-      req.flash("errors", { msg: "Confirm password is not match" });
-      return res.redirect("/api/v1/auth");
+      let msg = "Confirm password is not match";
+      res.render("userview/auth.view/error", { msg });
     }
-    const user = (await models.user.create({
-      fullName,
-      username,
-      email,
-      iam_role: Role.MEMBER,
-      hash_pwd: password,
-    })) as UserInstance;
+    else{
+      const user = (await models.user.create({
+        fullName,
+        username,
+        email,
+        iam_role: Role.MEMBER,
+        hash_pwd: password,
+      })) as UserInstance;
 
-    if (user) {
-      req.session.userId = user.id;
-      res.redirect("/api/v1/users");
-    } else {
-      req.flash("errors", { msg: "Confirm password is not match" });
-      res.redirect("/api/v1/auth");
+      if (user) {
+        req.session.userId = user.id;
+        req.flash("success", { msg: "Login success!!!" });
+        res.redirect("/");
+      } else {
+        const status = "400";
+        const msg = "Sign Up error";
+        res.render("userview/auth.view/error", { msg, status });
+      }
     }
   }
   public async logIn(req: Request, res: Response) {
@@ -38,17 +42,21 @@ export class AuthController extends ApplicationController {
       },
     })) as UserInstance;
     if (!checkUser) {
-      req.flash("errors", { msg: "Email is not found." });
-      res.redirect("/api/v1/auth");
+      req.flash("errors", { msg: "Email wrong." });
+      const msg= "Email is not found." ;
+
+      res.render("userview/auth.view/error",{ msg });
     } else {
       if (checkUser.hash_pwd === password) {
         req.session.userId = checkUser.id;
 
         req.flash("success", { msg: "Login success!!!" });
-        res.redirect("/api/v1/users");
+        res.redirect("/");
       } else {
-        req.flash("errors", { msg: "Password is not found." });
-        res.redirect("/api/v1/auth");
+        req.flash("error", { msg: "Password wrong." });
+        const msg= "Password wrong." ;
+
+        res.render("userview/auth.view/error",{ msg });
       }
     }
   }

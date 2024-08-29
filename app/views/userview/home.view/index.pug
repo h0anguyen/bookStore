@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  .page-wrapper
+    include ../partials/header
+    main.main
+      .page-header.text-center(style="background-image: url('images/page-header-bg.jpg')")
+        .container
+          h1.page-title
+            | BOOKS
+        // End .container
+      // End .page-header
+      nav.breadcrumb-nav.mb-2(aria-label='breadcrumb')
+        .container
+        // End .container
+      // End .breadcrumb-nav
+      .page-content
+        .container
+          if (books)
+            table.table
+              thead
+                tr
+                  th(scope='col') id
+                  th(scope='col') title
+                  th(scope='col') author
+                  th(scope='col') 
+              tbody
+                  each book in books
+                    tr
+                      td 
+                        b= book.id
+                      td= book.title
+                      td= book.author
+                      td 
+                        - if(book.userId==null)
+                          form(action="/api/v1/books", method="post") 
+                            input(type="hidden", name="id" value=book.id)
+                            input(type="hidden", name="title" value=book.title)
+                            input(type="hidden", name="author" value=book.author)
+                            button(type="submit").btn.btn-primary Buy
+                        - else
+                          a(href="###").btn Sold
+          else 
+            h4.text-center no more books
+    include ../partials/footer

@@ -43,10 +43,11 @@ export class ApplicationController {
     });
 
     if (checkEmail || checkusername) {
-      const mess = 1;
-      return res.render("userview/auth.view/index", { mess });
+      const status = "400";
+      const msg = "Cannot sign-up with the username or email already existed";
+      return res.render("userview/auth.view/error", { msg, status });
     } else {
-      const mess = 0;
+      const mess = null;
 
       next();
     }
@@ -57,12 +58,18 @@ export class ApplicationController {
 
     if (currentUser.role === Role.ADMIN) {
       req.flash("success", {
-        msg: `You are an admin`,
+        msg: `You are an ADMIN`,
       });
     } else {
-      req.flash("success", {
-        msg: `You are an user`,
-      });
+      if (currentUser.role === Role.MODERATOR) {
+        req.flash("success", {
+          msg: `You are an MODERATOR`,
+        });
+      } else {
+        req.flash("success", {
+          msg: `You are an MEMBER`,
+        });
+      }
     }
     next();
   }
