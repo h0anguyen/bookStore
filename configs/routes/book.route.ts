@@ -9,7 +9,7 @@ export class BookRoute {
 
   public static draw() {
     Route.resource(this.path, this.bookController, {
-      only: [RestActions.New, RestActions.Index, RestActions.Create],
+      only: [RestActions.Index],
     });
 
     return this.path;

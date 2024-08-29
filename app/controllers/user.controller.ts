@@ -1,5 +1,5 @@
 import models from "@models";
-import { Role, UserInstance } from "@models/user";
+import { UserInstance } from "@models/user";
 import { Request, Response } from "express";
 import { ApplicationController } from ".";
 
@@ -41,26 +41,25 @@ export class UserController extends ApplicationController {
   }
 
   public async create(req: Request, res: Response) {
-    const { fullName, username, email, password, confirmpassword } = req.body;
-    if (confirmpassword !== password) {
-      const msg = "Confirm password is not match";
-      return res.render("userview/auth.view/error", { msg });
-    }
-    const user = (await models.user.create({
-      fullName,
-      username,
-      email,
-      iam_role: Role.MEMBER,
-      hash_pwd: password,
-    })) as UserInstance;
+    const { id } = req.body;
 
-    if (user) {
-      req.session.userId = user.id;
-      req.flash("success", { msg: "Login success!!!" });
+    if (req.session.userId) {
+      await models.book.update(
+        {
+          publishedDate: new Date(),
+          userId: req.session.userId,
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      );
+      req.flash("success", { msg: "Buy success!!." });
       res.redirect("/");
     } else {
-      const msg = "Confirm password is not match";
-      res.render("userview/auth.view/error", { msg });
+      req.flash("errors", { msg: "You are not logged in." });
+      res.redirect("/api/v1/auth");
     }
   }
 }
