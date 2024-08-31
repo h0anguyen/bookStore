@@ -55,13 +55,16 @@ block content
                     u.text-danger= mess
                   form(action='/api/v1/auth/signup' method="post")
                     .form-group
-                      label(for='register-email-2') Full name*
-                      input#register-email-2.form-control(type='text' name='fullName' required='')
+                      label(for='register-email-2') Full name * 
+                        i (3-25 length, no whitespace and down the line)
+                      input#register-email-2.form-control(type='text' name='fullName' required='' pattern="^\S{3,25}$")
                     .form-group
-                      label(for='register-email-2') username *
-                      input#register-email-2.form-control(type='text' name='username' required='')
+                      label(for='register-email-2') username * 
+                        i (3-12 length, no whitespace and down the line)
+                      input#register-email-2.form-control(type='text' name='username' required='' pattern="^\S{3,12}$")
                     .form-group
-                      label(for='register-email-2') Your email address *
+                      label(for='register-email-2') Your email address * 
+                        i ({youremail}@gmail.com)
                       input#register-email-2.form-control(type='email' name='email' required='')
                     // End .form-group
                     .form-group

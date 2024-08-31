@@ -28,6 +28,7 @@ class Application {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());
     this.app.use(cookieParser());
+
     this.app.use(
       session({
         secret: process.env.SESSION_SECRET || "a",
